@@ -1,0 +1,6 @@
+- Add 'AUTOINCREMENT' to tables
+
+- Create the login function
+
+- Give a display for what the user is able to do 
+      (createCreature, leaderboard, settings(delete creature or profile)
