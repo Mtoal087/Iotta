@@ -1,14 +1,10 @@
-# .table shows all tables created
-# .schema shows all attributes and tables
 import sqlite3
 from datetime import date
 
-# greeting into IOTTA
 def greeting():
   print("Welcome to Iotta")
   print("Are you an Iotta member?")
   print("Type \'y\' for yes or \'n\' for no")
-  
   user = input()
   if user == 'y':
     login()
@@ -17,13 +13,23 @@ def greeting():
   else:
     print("Sorry. Your input is not one of the options.")
     greeting()
-
-
+    
 # login to IOTTA
 def login():
   print("Login")
-  print("")
-
+  print("Enter your username: ", end=" ")
+  username = input()
+  print("Enter your password: ", end=" ")
+  password = input()
+  cursor = connect.cursor()
+  cursor.execute('SELECT * FROM User WHERE userName = ? AND userPassword = ?', (username,password))
+  loggedOn = cursor.fetchone()
+  if loggedOn:
+    options()
+  else:
+    print("Invalid Credintials\nPlease try again.")
+    login()
+    
 # create a user
 def create_user():
   print("Sign up!")
@@ -41,8 +47,7 @@ def create_user():
 
   # Input into database
   create_user_sql(userName, joinedDate, lastActive,
-    noOfCreatures, rank, email, password  
-  )
+    noOfCreatures, rank, email, password)
 
 connect = sqlite3.connect("Iotta.db")
 cursor = connect.cursor()
@@ -53,15 +58,10 @@ def create_user_sql(uN, jD, lA, nOC, r, e, p):
   cursor.execute('INSERT INTO User (userName, joinedDate, lastActive, noOfCreatures, userEmail, userPassword, rank) VALUES (?,?,?,?,?,?,?)',
   (uN, jD, lA, nOC, r, e, p))
 
-
-
-
-def main():
-
-  print("Welcome to Iotta")
-  greeting()
-
-  connect.commit()
-  
-if __name__ == "__main__":
-  main()
+def options():
+  print()
+  print("Login Successful!")
+  print("Choose an option...")
+  print("C")  # Create Creature
+  print("B")  # Battle
+  print("S")  # Settings
