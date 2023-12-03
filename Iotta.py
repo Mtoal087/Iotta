@@ -5,8 +5,6 @@ from datetime import date
 from first import *
 
 def main():
-
-  print("Welcome to Iotta")
   greeting()  # gives a warning, still works perfectly fine
 
   connect = sqlite3.connect("Iotta.db")

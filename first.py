@@ -1,5 +1,6 @@
 import sqlite3
 from datetime import date
+from second import *
 
 def greeting():
   print("Welcome to Iotta")
@@ -60,8 +61,11 @@ def create_user_sql(uN, jD, lA, nOC, r, e, p):
 
 def options():
   print()
-  print("Login Successful!")
-  print("Choose an option...")
-  print("C")  # Create Creature
-  print("B")  # Battle
-  print("S")  # Settings
+  print("/")
+  print("| Login Successful!")
+  print("| Type an option...")
+  print("|")
+  print("| C - create creature")  # Create Creature
+  print("| L - look at leaderboards")  # Battle
+  print("| S - show settings")  # Settings
+  print("\\")
