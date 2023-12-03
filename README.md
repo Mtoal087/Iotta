@@ -9,6 +9,7 @@ The contributers to Iotta are:
 Matt Toal, Alex Hulliung, and Nathan Sarocco
 
 Creation began November 21, 2023
+
 GitHub repo was created December 1, 2023
 
 To run game, type 'python3 Iotta.py3' in directory's terminal.
