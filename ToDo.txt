@@ -4,3 +4,5 @@
 
 - Give a display for what the user is able to do 
       (createCreature, leaderboard, settings(delete creature or profile)
+
+- Create new User table without 'lastActive and userEmail'
