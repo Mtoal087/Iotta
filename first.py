@@ -1,6 +1,6 @@
 import sqlite3
 from datetime import date
-from second import *
+from creature import *
 
 # Logging in or signing up page
 
@@ -16,6 +16,7 @@ def greeting():
     print("Login")
     login()
   elif user == 'n':
+    print()
     create_user()
   else:
     print("Sorry. Your input is not one of the options.")
@@ -32,7 +33,7 @@ def login():
   result = cursor.fetchone()
   if result:
     print("-- Login Successful! --")
-    options()
+    options(username)
   else:
     print("-- Invalid Credentials!\tPlease try again. --")
     login()
@@ -42,7 +43,7 @@ def create_user():
   print("Sign up!")
   print()
   print("Create a user name: ", end=" ")
-  userName = input()
+  username = input()
   joinedDate = date.today()
   noOfCreatures = 0
   rank = 1
@@ -50,17 +51,17 @@ def create_user():
   password = input()
 
   # Input into database
-  create_user_sql(userName, joinedDate, noOfCreatures, rank, password)
+  create_user_sql(username, joinedDate, noOfCreatures, password, rank)
 
 
-def create_user_sql(uN, jD, nOC, r, p):
+def create_user_sql(username, joinedDate, noOfCreatures, password, rank):
   cursor = connect.cursor()
   cursor.execute('INSERT INTO User (userName, joinedDate, noOfCreatures, userPassword, rank) VALUES (?,?,?,?,?)',
-  (uN, jD, nOC, p, r))
+  (username, joinedDate, noOfCreatures, password, rank))
   connect.commit()
-  options()
+  options(username)
 
-def options():
+def options(username):
   print()
   print("/")
   print("| Type an option...")
@@ -69,3 +70,12 @@ def options():
   print("| L - look at leaderboards")  # Battle
   print("| S - show settings")  # Settings
   print("\\")
+
+  optionList = ['C', 'c']
+  user = input()
+  while user not in optionList:
+    print("Invalid input")
+    print("Please try again!")
+    user = input()
+  if user == 'C' or user == 'c':
+    create_creature(username)
