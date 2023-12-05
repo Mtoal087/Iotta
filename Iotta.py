@@ -3,11 +3,13 @@
 import sqlite3
 from first import greeting
 
+
 def main():
   connect = sqlite3.connect("Iotta.db")
 
   greeting()  
   connect.commit()
+  connect.close()
   
 if __name__ == "__main__":
   main()

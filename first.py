@@ -1,6 +1,9 @@
 import sqlite3
 from datetime import date
 from creature import *
+from leaderboards import *
+from online import *
+from viewOnline import *
 
 # Logging in or signing up page
 
@@ -33,6 +36,7 @@ def login():
   result = cursor.fetchone()
   if result:
     print("-- Login Successful! --")
+    login_bool(username)
     options(username)
   else:
     print("-- Invalid Credentials!\tPlease try again. --")
@@ -52,6 +56,10 @@ def create_user():
 
   # Input into database
   create_user_sql(username, joinedDate, noOfCreatures, password, rank)
+  print("Thank you for making an account!")
+  signIn_bool(username)
+  add_to_leaderboard(username, rank)
+  options(username)
 
 
 def create_user_sql(username, joinedDate, noOfCreatures, password, rank):
@@ -59,23 +67,38 @@ def create_user_sql(username, joinedDate, noOfCreatures, password, rank):
   cursor.execute('INSERT INTO User (userName, joinedDate, noOfCreatures, userPassword, rank) VALUES (?,?,?,?,?)',
   (username, joinedDate, noOfCreatures, password, rank))
   connect.commit()
-  options(username)
 
 def options(username):
   print()
   print("/")
   print("| Type an option...")
   print("|")
-  print("| C - create creature")  # Create Creature
-  print("| L - look at leaderboards")  # Battle
-  print("| S - show settings")  # Settings
+  print("| C - Creature")  # done -
+  print("| L - Leaderboards")  # done - 
+  print("| O - Online")
+  print("| S - Settings")  ######### not finished allow user to edit creatures/delete profile
+  print("| X - Logout") # done -
+  print("| M - Minimize Program")         # '''Create function that quits program but runs it again'''
   print("\\")
 
-  optionList = ['C', 'c']
+  optionList = ['C', 'c', 'L', 'l', 'X', 'x', 'O', 'o']
   user = input()
   while user not in optionList:
     print("Invalid input")
     print("Please try again!")
+    print()
     user = input()
   if user == 'C' or user == 'c':
     create_creature(username)
+  if user == 'L' or user == 'l':
+    leaderboard(username)
+  if user == 'X' or user == 'x':
+    logout(username)
+  if user == 'O' or user == 'o':
+    choice(username)
+
+def add_to_leaderboard(username, rank):
+  cursor = connect.cursor()
+  cursor.execute('''INSERT INTO Leaderboard (rank, user) VALUES (?,?)''', (rank, username))
+  connect.commit()
+
