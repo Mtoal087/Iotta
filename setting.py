@@ -62,6 +62,7 @@ def editing_creature(username, option):
 	cursor.execute('''SELECT * FROM Creature WHERE user = ?''', (username,))
 	creatures = cursor.fetchall()
 	wantEdited = creatures[option -1]
+	currentName = creatures[option -1][2]
 	print("What would you like to edit?")
 	print("/")
 	print("| N - name")
@@ -73,13 +74,13 @@ def editing_creature(username, option):
 	if user == 'N' or user == 'n':
 		print("Enter character's new name: ", end=" ")
 		name = input()
-		cursor.execute('''UPDATE Creature SET name =? WHERE user =?''', (name, username))
+		cursor.execute('''UPDATE Creature SET name =? WHERE user =? AND name=?''', (name, username, currentName))
 		connect.commit()
 		settings(username)
 	elif user == 'P' or user == 'p':
 		print("Enter character's new photo url: ", end=" ")
 		photo = input()
-		cursor.execute('''UPDATE Creature SET photo =? WHERE user =?''', (photo, username))
+		cursor.execute('''UPDATE Creature SET photo =? WHERE user =? AND name=?''', (photo, username, currentName))
 		connect.commit()
 		settings(username)
 	elif user == 'X' or user == 'x':
@@ -97,7 +98,7 @@ def editing_creature(username, option):
 	else:
 		print("Invalid input")
 		print()
-		editing(username, wantEdited)
+		editing_creature(username, wantEdited)
 
 
 
@@ -105,9 +106,9 @@ def delete_profile(username):
     from first import greeting
     cursor = connect.cursor()
     print("Are you sure you want to delete your profile?")
-    print("Type 'y' for yes or 'n' for no")
+    print("Type 'delete' for yes or 'n' for no")
     confirm = input()
-    if confirm == 'y':
+    if confirm == 'delete':
         from online import logout
 
         # Delete from related tables with CASCADE
@@ -124,3 +125,4 @@ def delete_profile(username):
         logout(username)
     else:
         settings(username)
+

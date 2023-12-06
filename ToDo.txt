@@ -12,6 +12,5 @@
 
 ---------------------------
 TO DO:
-Add settings (edit/delete creatures)
 Allow Searching through leaderboards
 Battle Players
