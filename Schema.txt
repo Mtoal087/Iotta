@@ -1,14 +1,11 @@
 CREATE TABLE Search (
-searchID INT PRIMARY KEY,
+searchID INTEGER PRIMARY KEY AUTOINCREMENT,
 userName STRING,
-characterName STRING,
-damage INT,
-health INT,
 ascending BOOL,
 descending BOOL,
 random BOOL,
-leaderboard STRING,
-FOREIGN KEY (leaderboard) REFERENCES Leaderboard(rank));
+lid STRING,
+FOREIGN KEY (lid) REFERENCES Leaderboard(lid) ON DELETE CASCADE);
 
 
 CREATE TABLE BattleRequests (

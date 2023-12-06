@@ -88,7 +88,12 @@ def editing_creature(username, option):
 		print("Type 'y' for yes or 'n' for no")
 		confirm = input()
 		if confirm == 'y':
+			cursor.execute('''SELECT noOfCreatures FROM User WHERE user =?''', (username,))
+			result = cursor.fetchone()
+			current = result[0]
+			current -= 1
 			cursor.execute('''DELETE FROM Creature WHERE user =? AND name =?''', (username, wantEdited[2]))
+			cursor.execute('''UPDATE User SET noOfCreatures = ? WHERE user =?''', (current, username))
 			connect.commit()
 			settings(username)
 		else:

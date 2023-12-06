@@ -3,7 +3,6 @@
 import sqlite3
 connect = sqlite3.connect("Iotta.db")
 
-
 def startProgram():
   from first import greeting
   greeting()

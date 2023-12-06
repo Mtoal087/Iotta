@@ -56,6 +56,10 @@ def create_user():
   print()
   print("Create a user name: ", end=" ")
   username = input()
+  while len(username) > 16 and len(username) < 3:
+    print("Username must be between 3 and 16 characters!")
+    print("Please enter a valid username: ", end=" ")
+    username = input()
   joinedDate = date.today()
   noOfCreatures = 0
   rank = 1
@@ -98,7 +102,7 @@ def options(username):
   if user == 'C' or user == 'c':
     create_creature(username)
   if user == 'L' or user == 'l':
-    leaderboard(username)
+    leader_options(username)
   if user == 'X' or user == 'x':
     logout(username)
   if user == 'O' or user == 'o':
