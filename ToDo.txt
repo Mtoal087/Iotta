@@ -1,7 +1,13 @@
 
 
 --- TABLES LEFT TO EDIT ---
-
-- Login 
 - Search
 - Battle Requests
+	- Winner + 2
+	- Loser - 1
+	- id
+	- When a person is offline, they can be attacked by their top (health-damange) creature
+	- Given a list of who they want to attack (shows rank and username), once again those players are offline
+	- Updates characters ranks
+
+- CASCADE all foreign keys if they are deleted

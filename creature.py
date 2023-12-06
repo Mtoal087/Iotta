@@ -63,10 +63,16 @@ def create_creature(username):
 				VALUES (?,?,?,?,?,?,?,?,?)''', (markForDeletion, damage, name, health, photo, height, weight, classNum, username))
 	connect.commit()
 	print(f"Congratulations on finding {name}!")
+	print(f"Statistics of {name}")
+	print(f"Class: {classOptions[classNum]}")
+	print(f"Damage: {damage}")
+	print(f"Health: {health}")
+	print(f"Height: {height} in")
+	print(f"Weight: {weight} lbs")
 	update_noOfCreatures(username)
 	options(username)
 
-	# need to update number of creatures within User table
+# need to update number of creatures within User table
 
 def update_noOfCreatures(username):
     cursor = connect.cursor()

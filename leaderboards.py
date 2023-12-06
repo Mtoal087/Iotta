@@ -21,4 +21,4 @@ def leaderboard(username):
 	print("RANK\tUSER")
 	for i in result:
 		print(f"{i[1]}\t{i[2]}")
-	options()
+	options(username)
