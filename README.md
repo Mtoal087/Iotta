@@ -12,6 +12,10 @@ Creation began November 21, 2023
 
 GitHub repo was created December 1, 2023
 
-To run game, type 'python3 Iotta.py3' in directory's terminal.
+To run game:
+	Install sqlite3 from url - https://www.sqlite.org/download.html
+	Clone this repository
+	Use a python3 compatible device or install pip3
+	Type 'python3 iotta.py' in directory's terminal
 
 Happy battling!

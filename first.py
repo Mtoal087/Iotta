@@ -1,11 +1,12 @@
 import sqlite3
-from datetime import date
+from datetime import datetime
 from creature import *
 from leaderboards import *
 from online import *
 from viewOnline import *
 from setting import *
 from Iotta import *
+from battlefield import *
 
 # Logging in or signing up page
 
@@ -60,7 +61,8 @@ def create_user():
     print("Username must be between 3 and 16 characters!")
     print("Please enter a valid username: ", end=" ")
     username = input()
-  joinedDate = date.today()
+  joinedDate = datetime.now()
+  joinedDate = joinedDate.strftime("%m/%d/%Y")
   noOfCreatures = 0
   rank = 1
   print("Create a password: ", end = " ")
@@ -85,14 +87,15 @@ def options(username):
   print("/")
   print("| Type an option...")
   print("|")
+  print("| B - Battle")
   print("| C - Creature")  # done -
   print("| L - Leaderboards")  # done - 
   print("| O - Online") # done -
-  print("| S - Settings")  ######### not finished allow user to edit creatures/delete profile
+  print("| S - Settings")  # done -
   print("| X - Logout") # done -
   print("\\")
 
-  optionList = ['C', 'c', 'L', 'l', 'X', 'x', 'O', 'o', 'S', 's']
+  optionList = ['C', 'c', 'L', 'l', 'X', 'x', 'O', 'o', 'S', 's', 'B', 'b']
   user = input()
   while user not in optionList:
     print("Invalid input")
@@ -109,6 +112,8 @@ def options(username):
     choice(username)
   if user == 'S' or user =='s':
     settings(username)
+  if user == 'B' or user == 'b':
+    battle(username)
 
 def add_to_leaderboard(username, rank):
   cursor = connect.cursor()
