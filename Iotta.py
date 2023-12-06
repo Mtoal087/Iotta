@@ -1,15 +1,19 @@
 # .table shows all tables created
 # .schema shows all attributes and tables
 import sqlite3
-from first import greeting
+connect = sqlite3.connect("Iotta.db")
 
+
+def startProgram():
+  from first import greeting
+  greeting()
+
+def closeProgram():
+  connect.close()
+  return
 
 def main():
-  connect = sqlite3.connect("Iotta.db")
-
-  greeting()  
-  connect.commit()
-  connect.close()
+  startProgram()  
   
 if __name__ == "__main__":
   main()

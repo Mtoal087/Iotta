@@ -10,4 +10,8 @@
 	- Given a list of who they want to attack (shows rank and username), once again those players are offline
 	- Updates characters ranks
 
-- CASCADE all foreign keys if they are deleted
+---------------------------
+TO DO:
+Add settings (edit/delete creatures && delete profile)
+Allow Searching through leaderboards
+Battle Players

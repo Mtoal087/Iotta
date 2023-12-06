@@ -4,6 +4,8 @@ from creature import *
 from leaderboards import *
 from online import *
 from viewOnline import *
+from setting import *
+from Iotta import *
 
 # Logging in or signing up page
 
@@ -11,16 +13,21 @@ from viewOnline import *
 connect = sqlite3.connect("Iotta.db")
 
 def greeting():
+  print("----------------------------------------------------------------")
   print("Welcome to Iotta")
   print("Are you an Iotta member?")
+  print("Type \'x\' to exit program.")
   print("Type \'y\' for yes or \'n\' for no")
   user = input()
   if user == 'y':
+    print()
     print("Login")
     login()
   elif user == 'n':
     print()
     create_user()
+  elif user == 'x':
+    closeProgram()
   else:
     print("Sorry. Your input is not one of the options.")
     greeting()
@@ -32,7 +39,7 @@ def login():
   print("Enter your password: ", end=" ")
   password = input()
   cursor = connect.cursor()
-  cursor.execute('SELECT * FROM User WHERE userName = ? AND userPassword = ?', (username, password))
+  cursor.execute('SELECT * FROM User WHERE user = ? AND userPassword = ?', (username, password))
   result = cursor.fetchone()
   if result:
     print("-- Login Successful! --")
@@ -40,7 +47,8 @@ def login():
     options(username)
   else:
     print("-- Invalid Credentials!\tPlease try again. --")
-    login()
+    print()
+    greeting()
     
 # create a user
 def create_user():
@@ -64,7 +72,7 @@ def create_user():
 
 def create_user_sql(username, joinedDate, noOfCreatures, password, rank):
   cursor = connect.cursor()
-  cursor.execute('INSERT INTO User (userName, joinedDate, noOfCreatures, userPassword, rank) VALUES (?,?,?,?,?)',
+  cursor.execute('INSERT INTO User (user, joinedDate, noOfCreatures, userPassword, rank) VALUES (?,?,?,?,?)',
   (username, joinedDate, noOfCreatures, password, rank))
   connect.commit()
 
@@ -75,13 +83,13 @@ def options(username):
   print("|")
   print("| C - Creature")  # done -
   print("| L - Leaderboards")  # done - 
-  print("| O - Online")
+  print("| O - Online") # done -
   print("| S - Settings")  ######### not finished allow user to edit creatures/delete profile
   print("| X - Logout") # done -
   print("| M - Minimize Program")         # '''Create function that quits program but runs it again'''
   print("\\")
 
-  optionList = ['C', 'c', 'L', 'l', 'X', 'x', 'O', 'o']
+  optionList = ['C', 'c', 'L', 'l', 'X', 'x', 'O', 'o', 'S', 's']
   user = input()
   while user not in optionList:
     print("Invalid input")
@@ -96,6 +104,8 @@ def options(username):
     logout(username)
   if user == 'O' or user == 'o':
     choice(username)
+  if user == 'S' or user =='s':
+    settings(username)
 
 def add_to_leaderboard(username, rank):
   cursor = connect.cursor()

@@ -15,6 +15,7 @@ connect = sqlite3.connect("Iotta.db")
 def leaderboard(username):
 	from first import options
 	cursor = connect.cursor()
+	print()
 	print("-- TOP 10 LEADERBOARD --")
 	cursor.execute("SELECT * FROM Leaderboard ORDER BY rank DESC LIMIT 10")
 	result = cursor.fetchall()

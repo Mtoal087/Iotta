@@ -1,0 +1,54 @@
+CREATE TABLE Search (
+searchID INT PRIMARY KEY,
+userName STRING,
+characterName STRING,
+damage INT,
+health INT,
+ascending BOOL,
+descending BOOL,
+random BOOL,
+leaderboard STRING,
+FOREIGN KEY (leaderboard) REFERENCES Leaderboard(rank));
+
+
+CREATE TABLE BattleRequests (
+sendUsername STRING,
+accepted BOOL NOT NULL,
+receiveUsername STRING,
+FOREIGN KEY (receiveUsername) REFERENCES User(userName),
+FOREIGN KEY (sendUsername) REFERENCES User(userName));
+
+
+CREATE TABLE Creature (
+creatureID INTEGER PRIMARY KEY AUTOINCREMENT,
+damage INT,
+name STRING NOT NULL,
+health INT,
+photo STRING,
+height INT,
+weight INT,
+class INT,
+user STRING,
+FOREIGN KEY (user) REFERENCES User(userName) ON DELETE CASCADE);
+
+
+CREATE TABLE Leaderboard (
+lid INTEGER PRIMARY KEY AUTOINCREMENT,
+rank INTEGER,
+user STRING,
+FOREIGN KEY (user) REFERENCES User(userName) ON DELETE CASCADE);
+
+
+CREATE TABLE Login (
+loginID INTEGER PRIMARY KEY AUTOINCREMENT,
+login BOOL,
+user STRING,
+FOREIGN KEY (user) REFERENCES User(userName) ON DELETE CASCADE);
+
+
+CREATE TABLE User (
+user STRING PRIMARY KEY,
+joinedDate STRING NOT NULL,
+noOfCreatures INT NOT NULL,
+userPassword STRING NOT NULL,
+rank INT);

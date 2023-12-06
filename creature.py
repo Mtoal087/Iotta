@@ -47,8 +47,6 @@ def create_creature(username):
 	weight = random.randint(100,1000)
 	height = random.randint(24, 120)
 
-	markForDeletion = False
-
 	print("If you would like to import photo from the web, enter the url, other wise, enter 'n'")
 	urlInput = input()
 	if urlInput != 'n':
@@ -59,8 +57,8 @@ def create_creature(username):
 	username = username
 	cursor = connect.cursor()
 	cursor.execute('''INSERT INTO Creature 
-				(markForDeletion, damage, name, health, photo, height, weight, class, user) 
-				VALUES (?,?,?,?,?,?,?,?,?)''', (markForDeletion, damage, name, health, photo, height, weight, classNum, username))
+				(damage, name, health, photo, height, weight, class, user) 
+				VALUES (?,?,?,?,?,?,?,?)''', (damage, name, health, photo, height, weight, classNum, username))
 	connect.commit()
 	print(f"Congratulations on finding {name}!")
 	print(f"Statistics of {name}")
@@ -76,14 +74,14 @@ def create_creature(username):
 
 def update_noOfCreatures(username):
     cursor = connect.cursor()
-    cursor.execute("SELECT noOfCreatures FROM User WHERE userName = ?", (username, ))
+    cursor.execute("SELECT noOfCreatures FROM User WHERE user = ?", (username, ))
     result = cursor.fetchall()
 
     if result:
         numCreatures = result[0][0]  # Extract the value from the tuple
         numCreatures += 1
 
-        cursor.execute("UPDATE User SET noOfCreatures = ? WHERE userName = ?", (numCreatures, username))
+        cursor.execute("UPDATE User SET noOfCreatures = ? WHERE user = ?", (numCreatures, username))
         connect.commit()
     else:
         print(f"User with username {username} not found.")
