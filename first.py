@@ -86,7 +86,6 @@ def options(username):
   print("| O - Online") # done -
   print("| S - Settings")  ######### not finished allow user to edit creatures/delete profile
   print("| X - Logout") # done -
-  print("| M - Minimize Program")         # '''Create function that quits program but runs it again'''
   print("\\")
 
   optionList = ['C', 'c', 'L', 'l', 'X', 'x', 'O', 'o', 'S', 's']
