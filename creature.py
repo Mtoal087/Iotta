@@ -25,12 +25,15 @@ def create_creature_prompt():
 
 def create_creature(username):
 	from first import options
-	print("Enter a name for your creature")
+	print("Enter a name for your creature or press 'enter' if you would like to exit")
 	name = input()
-	health = random.randint(100, 250)
+	if name == '':
+		options(username)
+		return
+	health = random.randint(100, 500)
 	while health % 5 != 0:
 		health += 1
-	damage = random.randint(25,100)
+	damage = random.randint(25,400)
 	while damage % 5 != 0:
 		damage += 1
 	classOptions = ['archer', 'warrior', 'tank', 'mage', 'healer', 'bard']

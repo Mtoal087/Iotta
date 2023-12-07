@@ -105,17 +105,17 @@ def battling(username, opponent):
     
     if userHealth > 0:
         print(f"You have won!")
-        updateRank(username, username, opponent)
+        updateRank(username, opponent, username, opponent)
     elif opponentHealth > 0:
         print(f"The opponent has won...")
-        updateRank(username, opponent, username)
+        updateRank(username, opponent, opponent, username)
     else:
         print("DRAW")
         view_offline(username)
 
 
 
-def updateRank(username, winner, loser):
+def updateRank(username, opponent, winner, loser):
     cursor = connect.cursor()
     cursor.execute("UPDATE User SET rank = rank + 2 WHERE user =?", (winner,))
     connect.commit()
@@ -134,7 +134,15 @@ def updateRank(username, winner, loser):
     cursor.execute("SELECT rank FROM User WHERE user =?", (username,))
     rank = cursor.fetchone()
     rank = rank[0]
-    print(f"Your new rank is: {rank}")
+    print(f"Your rank is: {rank}")
 
+    updateBattleTable(username, opponent, winner)
     view_offline(username)
 
+
+def updateBattleTable(username, opponent, winner):
+    cursor = connect.cursor()
+    cursor.execute('''INSERT INTO Battle (user, opponent, winner) VALUES (?,?,?)''',
+                (username, opponent, winner))
+    connect.commit()
+    return
