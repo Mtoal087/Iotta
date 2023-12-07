@@ -30,10 +30,10 @@ def create_creature(username):
 	if name == '':
 		options(username)
 		return
-	health = random.randint(100, 500)
+	health = random.randint(200, 750)
 	while health % 5 != 0:
 		health += 1
-	damage = random.randint(25,400)
+	damage = random.randint(10,150)
 	while damage % 5 != 0:
 		damage += 1
 	classOptions = ['archer', 'warrior', 'tank', 'mage', 'healer', 'bard']
