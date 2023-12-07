@@ -130,6 +130,7 @@ def updateRank(username, opponent, winner, loser):
         connect.commit()
         cursor.execute("UPDATE Leaderboard SET rank = rank - 1 WHERE user =?", (loser,))
         connect.commit()
+    notifyOpponent(opponent)
 
     cursor.execute("SELECT rank FROM User WHERE user =?", (username,))
     rank = cursor.fetchone()
@@ -146,3 +147,15 @@ def updateBattleTable(username, opponent, winner):
                 (username, opponent, winner))
     connect.commit()
     return
+
+def notifyOpponent(opponent):
+    cursor = connect.cursor()
+    cursor.execute('''SELECT login FROM Login WHERE user=?''', (opponent,))
+    login = cursor.fetchone()
+    login = login[0]
+    if login == 0:
+        cursor.execute('''UPDATE User SET loss = 1 WHERE user =?''', (opponent,))
+        connect.commit()
+        return
+    else:
+        return

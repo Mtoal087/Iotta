@@ -2,4 +2,4 @@
 ---------------------------
 TO DO:
 create battle 
-	keep track of who wins and loses (battleid, user, opponent, winner)
+	keep track of who wins and losses (battleid, user, opponent, winner)

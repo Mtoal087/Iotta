@@ -43,7 +43,19 @@ def login():
   cursor.execute('SELECT * FROM User WHERE user = ? AND userPassword = ?', (username, password))
   result = cursor.fetchone()
   if result:
+    cursor.execute('SELECT loss FROM User WHERE user =?', (username,))
+    result = cursor.fetchone()
     print("-- Login Successful! --")
+    if result[0] == 1:
+      print()
+      print()
+      cursor.execute('UPDATE User SET loss = 0 WHERE user =?', (username,))
+      connect.commit()
+      cursor.execute("SELECT rank FROM User WHERE user =?", (username,))
+      result = cursor.fetchone()
+      print("You have been attacked!")
+      print(f"Your rank is now {result[0]}")
+      print()
     login_bool(username)
     options(username)
   else:
