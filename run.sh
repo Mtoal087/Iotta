@@ -19,8 +19,5 @@ if ! command_exists python3; then
     sudo apt-get install -y python3
 fi
 
-# Clone the GitHub repository
-echo "Cloning the Iotta GitHub repository..."
-git clone https://github.com/Mtoal087/Iotta.git
 
 echo "Setup complete!"
