@@ -21,6 +21,6 @@ def logout(username):
 	boolean = False
 	cursor.execute("UPDATE Login SET login = ? WHERE user = ?", (boolean, username))
 	connect.commit()
-	print("Return soon!")
+	print(f"Return soon {username}!")
 	print("----------")
 	greeting()

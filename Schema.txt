@@ -1,19 +1,19 @@
+CREATE TABLE Battle (
+battle_id INTEGER PRIMARY KEY AUTOINCREMENT,
+user STRING,
+opponent STRING,
+winner STRING
+);
+
 CREATE TABLE Search (
 searchID INTEGER PRIMARY KEY AUTOINCREMENT,
-userName STRING,
-ascending BOOL,
-descending BOOL,
-random BOOL,
-lid STRING,
-FOREIGN KEY (lid) REFERENCES Leaderboard(lid) ON DELETE CASCADE);
-
-
-CREATE TABLE BattleRequests (
-sendUsername STRING,
-accepted BOOL NOT NULL,
-receiveUsername STRING,
-FOREIGN KEY (receiveUsername) REFERENCES User(userName),
-FOREIGN KEY (sendUsername) REFERENCES User(userName));
+user STRING,
+byUser BOOL,
+userSearched STRING,
+byRank BOOL,
+rankSearched INTEGER,
+numOfResults INTEGER
+);
 
 
 CREATE TABLE Creature (

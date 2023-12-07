@@ -93,12 +93,16 @@ def search_by_rank(username, rank):
 	cursor.execute("SELECT rank, user FROM Leaderboard WHERE rank =?", (rank,))
 	results = cursor.fetchall()
 	print()
+	numOfResults = 0
 	if len(results) == 0:
 		print("NO USERS WITHIN THIS RANK")
 	else:
 		print("RANK\tUSER")
 		for result in results:
 			print(f"{result[0]}|\t{result[1]}")
+			numOfResults += 1
+	cursor.execute("INSERT INTO Search (user, byUser, userSearched, byRank, rankSearched, numOfResults) VALUES (?,?,?,?,?,?)", (username, False, 'NULL', True, rank, numOfResults))
+	connect.commit()
 	print()
 	search(username)
 
@@ -106,12 +110,17 @@ def search_by_username(username, uN):
 	cursor = connect.cursor()
 	cursor.execute("SELECT rank, user, noOfCreatures, joinedDate FROM User WHERE user = ?", (uN,))
 	result = cursor.fetchone()
+
+	numOfResults = 0
 	if result is None:
 		print("NO USER WITH THIS USERNAME")
 
 	else:
 		print(f"RANK\t\tUSER\t\tCREATURES CREATED\t\tJOINED DATE")
 		print(f"{result[0]}\t\t{result[1]}\t\t{result[2]}\t\t\t\t{result[3]}")
+		numOfResults += 1
 
+	cursor.execute("INSERT INTO Search (user, byUser, userSearched, byRank, rankSearched, numOfResults) VALUES (?,?,?,?,?,?)", (username, True, uN, False, 0, numOfResults))
+	connect.commit()
 	print()
 	search(username)
