@@ -1,5 +1,0 @@
-
----------------------------
-TO DO:
-create battle 
-	keep track of who wins and losses (battleid, user, opponent, winner)
