@@ -69,7 +69,7 @@ def create_user():
   print()
   print("Create a user name: ", end=" ")
   username = input()
-  while len(username) > 16 and len(username) < 3:
+  while len(username) > 16 or len(username) < 3:
     print("Username must be between 3 and 16 characters!")
     print("Please enter a valid username: ", end=" ")
     username = input()

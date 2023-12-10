@@ -20,4 +20,5 @@ if ! command_exists python3; then
 fi
 
 
-echo "Setup complete!"
+echo "Starting Iotta..."
+python3 Iotta.py
